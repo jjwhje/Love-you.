@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>💝 Gửi người anh thương nhất 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Nền sao động */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Hiệu ứng trái tim bay nền */
+        .bg-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            animation: floatHeart linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes floatHeart {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Nhân vật hoạt hình */
+        .character {
+            position: fixed;
+            z-index: 20;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .character:hover {
+            transform: scale(1.1);
+        }
+
+        .character img {
+            width: 100%;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.2));
+        }
+
+        .doraemon { bottom: 20px; left: 15px; width: 85px; animation: bounce 2s ease infinite; }
+        .hello-kitty { top: 60px; right: 15px; width: 75px; animation: bounce 2.5s ease infinite reverse; }
+        .pooh { bottom: 80px; right: 20px; width: 70px; animation: bounce 1.8s ease infinite; }
+        .cony { top: 120px; left: 15px; width: 65px; animation: bounce 2.2s ease infinite; }
+        .mochi { bottom: 150px; left: 45%; width: 55px; animation: bounce 3s ease infinite; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Nội dung chính */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 20px;
+        }
+
+        .love-letter {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 50px 50px 50px 30px;
+            padding: 40px 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: slideUp 0.8s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Trang trí góc */
+        .corner-deco {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #ffb347;
+        }
+
+        .corner-tl {
+            top: 15px;
+            left: 15px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 20px 0 0 0;
+        }
+
+        .corner-br {
+            bottom: 15px;
+            right: 15px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 20px 0;
+        }
+
+        /* Trái tim chính */
+        .main-heart {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .main-heart svg {
+            width: 80px;
+            filter: drop-shadow(0 0 15px #ff6b9d);
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            text-align: center;
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+
+        .date {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #e67e22;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        /* Nội dung thư */
+        .message-content {
+            margin: 25px 0;
+        }
+
+        .message-line {
+            margin-bottom: 18px;
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .message-line:nth-child(1) { animation-delay: 0.2s; }
+        .message-line:nth-child(2) { animation-delay: 0.5s; }
+        .message-line:nth-child(3) { animation-delay: 0.8s; }
+        .message-line:nth-child(4) { animation-delay: 1.1s; }
+        .message-line:nth-child(5) { animation-delay: 1.4s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+        }
+
+        .message-line p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #2c3e50;
+        }
+
+        .highlight {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        /* Trích dẫn */
+        .quote {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 20px;
+            border-radius: 30px;
+            margin: 25px 0;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: #d35400;
+            position: relative;
+        }
+
+        .quote::before {
+            content: "“";
+            font-size: 3rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            opacity: 0.5;
+        }
+
+        .quote::after {
+            content: "”";
+            font-size: 3rem;
+            position: absolute;
+            bottom: -20px;
+            right: 10px;
+            opacity: 0.5;
+        }
+
+        /* Bảng cảm xúc */
+        .feeling-box {
+            background: #ffe0e7;
+            border-radius: 30px;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .feeling-item {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 40px;
+            background: white;
+        }
+
+        .feeling-item:hover {
+            transform: scale(1.1);
+            background: #ff6b9d;
+            color: white;
+        }
+
+        .feeling-emoji {
+            font-size: 1.8rem;
+        }
+
+        .feeling-text {
+            font-size: 0.7rem;
+        }
+
+        /* Nút gửi */
+        .send-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6b9d, #ff477e);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 107, 157, 0.5);
+        }
+
+        /* Hiệu ứng click */
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            font-size: 25px;
+            animation: pop 0.5s ease forwards;
+            z-index: 1000;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5) translateY(-50px);
+                opacity: 0;
+            }
+        }
+
+        /* Modal thông báo */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            max-width: 300px;
+            animation: modalPop 0.3s ease;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .modal-close {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #ff6b9d;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Loading */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.8s;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            text-align: center;
+        }
+
+        .loader span {
+            font-size: 3rem;
+            animation: bounce 0.6s infinite;
+            display: inline-block;
+        }
+
+        .loader span:nth-child(2) { animation-delay: 0.1s; }
+        .loader span:nth-child(3) { animation-delay: 0.2s; }
+        .loader span:nth-child(4) { animation-delay: 0.3s; }
+        .loader span:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes bounceHeart {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="loading" id="loading">
+    <div class="loader">
+        <span>💖</span>
+        <span>💗</span>
+        <span>💕</span>
+        <span>💝</span>
+        <span>❤️</span>
+    </div>
+</div>
+
+<!-- Nền sao -->
+<div class="stars" id="stars"></div>
+
+<!-- Trái tim bay nền -->
+<div class="bg-hearts" id="bgHearts"></div>
+
+<!-- Nhân vật hoạt hình -->
+<div class="character doraemon">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%230066cc'/%3E%3Ccircle cx='35' cy='40' r='6' fill='white'/%3E%3Ccircle cx='65' cy='40' r='6' fill='white'/%3E%3Ccircle cx='35' cy='40' r='3' fill='black'/%3E%3Ccircle cx='65' cy='40' r='3' fill='black'/%3E%3Cpath d='M40,60 Q50,70 60,60' stroke='%23cc0000' stroke-width='3' fill='none'/%3E%3Ccircle cx='50' cy='85' r='8' fill='%23ff6666'/%3E%3C/svg%3E" alt="Doraemon">
+</div>
+<div class="character hello-kitty">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23ffb3c6'/%3E%3Cpath d='M30,35 L35,30 L40,35' stroke='%238b5e6b' stroke-width='2' fill='none'/%3E%3Cpath d='M60,35 L65,30 L70,35' stroke='%238b5e6b' stroke-width='2' fill='none'/%3E%3Ccircle cx='50' cy='55' r='12' fill='%23ff9999'/%3E%3Ccircle cx='45' cy='55' r='2' fill='white'/%3E%3Ccircle cx='55' cy='55' r='2' fill='white'/%3E%3C/svg%3E" alt="Hello Kitty">
+</div>
+<div class="character pooh">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f4a460'/%3E%3Ccircle cx='35' cy='42' r='5' fill='black'/%3E%3Ccircle cx='65' cy='42' r='5' fill='black'/%3E%3Cellipse cx='50' cy='60' rx='12' ry='8' fill='%238B4513'/%3E%3C/svg%3E" alt="Pooh">
+</div>
+<div class="character cony">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='55' rx='30' ry='35' fill='%23fff5e6'/%3E%3Cellipse cx='35' cy='25' rx='15' ry='20' fill='%23fff5e6'/%3E%3Cellipse cx='65' cy='25' rx='15' ry='20' fill='%23fff5e6'/%3E%3Ccircle cx='40' cy='50' r='4' fill='black'/%3E%3Ccircle cx='60' cy='50' r='4' fill='black'/%3E%3Cellipse cx='50' cy='70' rx='8' ry='5' fill='%23ffb3c6'/%3E%3C/svg%3E" alt="Cony">
+</div>
+
+<div class="container">
+    <div class="love-letter">
+        <div class="corner-deco corner-tl"></div>
+        <div class="corner-deco corner-br"></div>
+        
+        <div class="main-heart">
+            <svg viewBox="0 0 100 100">
+                <path d="M50,30 C50,30 35,10 20,20 C5,30 5,50 20,65 C35,80 50,90 50,90 C50,90 65,80 80,65 C95,50 95,30 80,20 C65,10 50,30 50,30Z" fill="#ff6b9d"/>
+            </svg>
+        </div>
+
+        <h1>Gửi người thương của anh</h1>
+        <div class="date">🌸 Tháng 5 - Mùa yêu thương 🌸</div>
+
+        <div class="message-content">
+            <div class="message-line">
+                <p>✨ Đôi khi anh tự hỏi, <span class="highlight">"Sao mình lại may mắn đến thế?"</span> Và câu trả lời luôn là... vì có em.</p>
+            </div>
+            <div class="message-line">
+                <p>💖 Em không cần phải hoàn hảo, bởi vì với anh, em đã là <span class="highlight">điều tuyệt vời nhất</span> rồi. Từ nụ cười cho đến những lúc em làm nũng, tất cả đều khiến anh thương lắm.</p>
+            </div>
+            <div class="message-line">
+                <p>🌙 Những ngày mệt mỏi, chỉ cần nghĩ đến em thôi cũng đủ để anh có thêm động lực. <span class="highlight">Em là ánh sáng</span> dẫn đường cho anh trong những ngày tối tăm nhất.</p>
+            </div>
+            <div class="message-line">
+                <p>💭 Anh không giỏi nói những lời hoa mỹ, nhưng anh biết rằng... <span class="highlight">Trái tim anh thuộc về em từ lâu lắm rồi</span>. Và anh sẽ không muốn lấy lại đâu.</p>
+            </div>
+            <div class="message-line">
+                <p>🥰 Cảm ơn em vì đã xuất hiện. Cảm ơn em vì những ngày tháng qua. Và hãy để anh được <span class="highlight">thương em, chiều em, bên em</span> thật lâu nhé.</p>
+            </div>
+        </div>
+
+        <div class="quote">
+            "Anh không cần cả thế giới, chỉ cần một người thương anh thật lòng - và anh đã tìm thấy người đó là em."
+        </div>
+
+        <div class="feeling-box" id="feelingBox">
+            <div class="feeling-item" data-feeling="❤️">
+                <div class="feeling-emoji">❤️</div>
+                <div class="feeling-text">Yêu</div>
+            </div>
+            <div class="feeling-item" data-feeling="😘">
+                <div class="feeling-emoji">😘</div>
+                <div class="feeling-text">Thương</div>
+            </div>
+            <div class="feeling-item" data-feeling="🥰">
+                <div class="feeling-emoji">🥰</div>
+                <div class="feeling-text">Nhớ</div>
+            </div>
+            <div class="feeling-item" data-feeling="💕">
+                <div class="feeling-emoji">💕</div>
+                <div class="feeling-text">Quý</div>
+            </div>
+            <div class="feeling-item" data-feeling="🌸">
+                <div class="feeling-emoji">🌸</div>
+                <div class="feeling-text">Thương lắm</div>
+            </div>
+        </div>
+
+        <button class="send-btn" id="sendBtn">💝 GỬI ĐẾN EM 💝</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h3>💖 Yêu em thật nhiều! 💖</h3>
+        <p>Hy vọng em sẽ luôn vui vẻ và hạnh phúc. Anh luôn ở đây, bên cạnh em. 🌹</p>
+        <button class="modal-close" id="modalClose">Đồng ý 💕</button>
+    </div>
+</div>
+
+<script>
+    // ========== TẠO HIỆU ỨNG NỀN ==========
+    
+    // Sao trên nền
+    function createStars() {
+        const starsDiv = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = Math.random() * 2 + 1 + 's';
+            starsDiv.appendChild(star);
+        }
+    }
+    createStars();
+
+    // Trái tim bay nền
+    function createBgHeart() {
+        const heartsDiv = document.getElementById('bgHearts');
+        const heart = document.createElement('div');
+        heart.className = 'bg-heart';
+        heart.textContent = ['❤️', '💖', '💗', '💓', '💕', '💝'][Math.floor(Math.random() * 6)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+        heart.style.animationDuration = Math.random() * 8 + 6 + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heartsDiv.appendChild(heart);
+        setTimeout(() => heart.remove(), 12000);
+    }
+
+    setInterval(createBgHeart, 1500);
+    for (let i = 0; i < 10; i++) setTimeout(createBgHeart, i * 500);
+
+    // ========== HIỆU ỨNG CLICK CẢM XÚC ==========
+    const feelingItems = document.querySelectorAll('.feeling-item');
+    
+    feelingItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const feeling = item.dataset.feeling;
+            
+            // Hiệu ứng nổ nhiều trái tim
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const effect = document.createElement('div');
+                    effect.className = 'click-effect';
+                    effect.textContent = feeling;
+                    effect.style.left = e.clientX + (Math.random() - 0.5) * 100 + 'px';
+                    effect.style.top = e.clientY + (Math.random() - 0.5) * 100 + 'px';
+                    document.body.appendChild(effect);
+                    setTimeout(() => effect.remove(), 500);
+                }, i * 50);
+            }
+        });
+    });
+
+    // ========== NÚT GỬI ==========
+    const sendBtn = document.getElementById('sendBtn');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+
+    sendBtn.addEventListener('click', () => {
+        // Bùng nổ trái tim full màn hình
+        for (let i = 0; i < 60; i++) {
+            setTimeout(() => {
+                const effect = document.createElement('div');
+                effect.className = 'click-effect';
+                effect.textContent = ['❤️', '💖', '💗', '💕', '💝', '🌸', '🌹', '🥰'][Math.floor(Math.random() * 8)];
+                effect.style.fontSize = '30px';
+                effect.style.left = Math.random() * window.innerWidth + 'px';
+                effect.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(effect);
+                setTimeout(() => effect.remove(), 600);
+            }, i * 60);
+        }
+        
+        // Hiện modal
+        modal.classList.add('active');
+    });
+
+    modalClose.addEventListener('click', () => {
+        modal.classList.remove('active');
+        
+        // Thêm hiệu ứng mừng
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                const effect = document.createElement('div');
+                effect.className = 'click-effect';
+                effect.textContent = '💝';
+                effect.style.left = Math.random() * window.innerWidth + 'px';
+                effect.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(effect);
+                setTimeout(() => effect.remove(), 500);
+            }, i * 80);
+        }
+    });
+
+    // ========== BẮT ĐẦU VỚI HIỆU ỨNG ==========
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const loading = document.getElementById('loading');
+            loading.classList.add('hide');
+            setTimeout(() => loading.remove(), 800);
+        }, 2000);
+    });
+
+    // Click vào nhân vật tạo hiệu ứng
+    document.querySelectorAll('.character').forEach(char => {
+        char.addEventListener('click', (e) => {
+            const effects = ['💖', '💕', '🥰', '😘', '🌸', '🐰', '🐻', '🫶'];
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const effect = document.createElement('div');
+                    effect.className = 'click-effect';
+                    effect.textContent = effects[Math.floor(Math.random() * effects.length)];
+                    effect.style.left = e.clientX + (Math.random() - 0.5) * 80 + 'px';
+                    effect.style.top = e.clientY + (Math.random() - 0.5) * 80 + 'px';
+                    document.body.appendChild(effect);
+                    setTimeout(() => effect.remove(), 500);
+                }, i * 50);
+            }
+        });
+    });
+</script>
+</body>
+</html>
